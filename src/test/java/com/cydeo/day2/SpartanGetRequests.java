@@ -22,7 +22,7 @@ public class SpartanGetRequests {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .when()
-                .get(baseUrl + "/api/spartans");
+                        .get(baseUrl + "/api/spartans");
 
 //        printing status code from response object
         System.out.println("response.statusCode() = " + response.statusCode());
