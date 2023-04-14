@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class SpartanGetRequests {
 
     String baseUrl = "http://34.207.191.31:8000";
@@ -20,7 +23,7 @@ public class SpartanGetRequests {
     @Test
     public void test1() {
 
-        Response response = RestAssured.given().accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON)
                 .when()
                         .get(baseUrl + "/api/spartans");
 
@@ -34,7 +37,7 @@ public class SpartanGetRequests {
         response.prettyPrint();
 
 //        how to do APi testing then ?
-        Assertions.assertEquals(response.contentType(), "application/json");
+        assertEquals(response.contentType(), "application/json");
     }
 
          /*
@@ -49,18 +52,18 @@ public class SpartanGetRequests {
     @Test
     public void test2() {
 
-        Response response = RestAssured.given().accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON)
                 .when()
                 .get(baseUrl + "/api/spartans/3");
 
 //      verify status code 200
-        Assertions.assertEquals(response.statusCode(), 200);
+        assertEquals(response.statusCode(), 200);
 
 //        verify content type
-        Assertions.assertEquals(response.contentType(), "application/json");
+        assertEquals(response.contentType(), "application/json");
 
 //        verify json body contains Fidole
-        Assertions.assertTrue(response.body().asString().contains("Fidole"));
+        assertTrue(response.body().asString().contains("Fidole"));
 
     }
 
@@ -78,27 +81,27 @@ public class SpartanGetRequests {
     @Test
     public void test3() {
 //        send request and save response inside he response object
-        Response response = RestAssured.when().get(baseUrl + "/api/hello");
+        Response response = when().get(baseUrl + "/api/hello");
 
 //        verify status code 200
-        Assertions.assertEquals(200, response.statusCode());
+        assertEquals(200, response.statusCode());
 
 //        verify content type
-        Assertions.assertEquals("text/plain;charset=UTF-8", response.contentType());
+        assertEquals("text/plain;charset=UTF-8", response.contentType());
 
 //        verify we have headers named date
 //        we use hasHEaderWithName method to verify header exist  or not - it returns boolean
-        Assertions.assertTrue(response.headers().hasHeaderWithName("Date"));
+        assertTrue(response.headers().hasHeaderWithName("Date"));
 //        how to get and header from response using header key ?
 
         System.out.println("response.header() = " + response.header("Date"));
 
 //     Verify that content-Length is 17
-        Assertions.assertEquals("17", response.header("Content-Length"));
+        assertEquals("17", response.header("Content-Length"));
         System.out.println("response.header(Content-Length) = " + response.header("Content-Length"));
 
 //Verify body is “Hello from Sparta"
-        Assertions.assertEquals("Hello from Sparta", response.body().asString());
+        assertEquals("Hello from Sparta", response.body().asString());
 
 
     }
