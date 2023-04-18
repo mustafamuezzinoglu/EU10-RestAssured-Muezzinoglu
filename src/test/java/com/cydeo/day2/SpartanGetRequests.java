@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SpartanGetRequests {
 
-    String baseUrl = "http://34.207.191.31:8000";
+    String baseUrl = "http://3.83.39.224:8000";
 
 //    Given Accept type application/json
 //    When user send GET request to api/spartans end point

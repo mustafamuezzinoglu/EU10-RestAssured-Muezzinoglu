@@ -8,7 +8,7 @@ import java.sql.SQLOutput;
 
 public class SimpleGetRequest {
 
-    String url ="http://34.207.191.31:8000/api/spartans";
+    String url ="http://3.83.39.224:8000/api/spartans";
 
     @Test
     public void test1(){

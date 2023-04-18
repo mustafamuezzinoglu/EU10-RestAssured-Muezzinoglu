@@ -17,7 +17,7 @@ public class HrGetRequests {
 //    BeforeAll is a annotation equals to @BeforeClass in TestNg, we use with static method name
     @BeforeAll
     public static void init(){
-        RestAssured.baseURI = "http://34.207.191.31:1000/ords/hr";
+        RestAssured.baseURI = "http://3.83.39.224:1000/ords/hr";
     }
 
     @DisplayName("GET request o /regions")
