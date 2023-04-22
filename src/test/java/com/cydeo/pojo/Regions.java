@@ -9,9 +9,9 @@ import lombok.ToString;
 import java.util.List;
 
 
-@Getter //from lombok dependency
-@Setter
-@ToString
+@Getter   //from lombok dependency
+@Setter   //from lombok dependency
+@ToString  //from lombok dependency
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Regions {
 
