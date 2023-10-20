@@ -25,12 +25,13 @@ public class SpartanNegativeGetTest {
     Then status code must be 406
     And response Content Type must be application/xml;charset=UTF-8
     */
+
     @Test
     public void test1() {
         Response response = given()
                                     .accept(ContentType.XML)
                             .when()
-                                   .get(baseURI + "/api/spartans/10");
+                                   .get("/api/spartans/10");
 
 //      verify status code 406
         assertEquals(406,response.statusCode());

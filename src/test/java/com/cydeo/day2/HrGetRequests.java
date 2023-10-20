@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HrGetRequests {
 
-//    BeforeAll is a annotation equals to @BeforeClass in TestNg, we use with static method name
+//    BeforeAll is an annotation equals to @BeforeClass in TestNg, we use with static method name
     @BeforeAll
     public static void init(){
         RestAssured.baseURI = "http://3.83.39.224:1000/ords/hr";
