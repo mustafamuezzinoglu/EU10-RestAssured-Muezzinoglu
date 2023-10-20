@@ -80,7 +80,7 @@ public class SpartanGetRequests {
     @DisplayName("GET request to /api/hello")
     @Test
     public void test3() {
-//        send request and save response inside he response object
+//        send request and save response inside the response object
         Response response = when().get(baseUrl + "/api/hello");
 
 //        verify status code 200
@@ -90,15 +90,17 @@ public class SpartanGetRequests {
         assertEquals("text/plain;charset=UTF-8", response.contentType());
 
 //        verify we have headers named date
-//        we use hasHEaderWithName method to verify header exist  or not - it returns boolean
+//        we use hasHeaderWithName method to verify header exist  or not - it returns boolean
         assertTrue(response.headers().hasHeaderWithName("Date"));
-//        how to get and header from response using header key ?
 
-        System.out.println("response.header() = " + response.header("Date"));
+//        how to get and header from response using header key ?
+//        we use response.header(String HeaderName) method to get any header value
+        System.out.println("response.header(Content-Length) = " + response.header("Content-Length"));
+        System.out.println("response.header(Date) = " + response.header("Date"));
 
 //     Verify that content-Length is 17
         assertEquals("17", response.header("Content-Length"));
-        System.out.println("response.header(Content-Length) = " + response.header("Content-Length"));
+
 
 //Verify body is “Hello from Sparta"
         assertEquals("Hello from Sparta", response.body().asString());

@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,4 +53,29 @@ public class SpartanWithJsonPath extends SpartanTestBase {
         System.out.println("phone = " + phone);
     }
 
+
+
+
+    @Test
+    public void test3() {
+
+        Response response =
+                given().accept(ContentType.JSON)
+                        .pathParam("id", 11)
+                        .when().get("/api/spartans/{id}");
+
+//        assertEquals(response.statusCode(), 200);
+//        int id = response.path("id");
+//        System.out.println("id = " + id);
+
+        JsonPath jsonData = response.jsonPath();
+        int id1 = jsonData.getInt("id");
+        String name = jsonData.getString("name");
+        String gender = jsonData.getString("gender");
+        long phone = jsonData.getLong("phone");
+
+        System.out.println("phone = " + phone);
+        assertEquals(phone, 7959094216l);
+
+    }
 }

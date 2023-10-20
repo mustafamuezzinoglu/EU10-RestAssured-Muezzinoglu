@@ -28,7 +28,7 @@ public class JSONtoJAVATest extends SpartanTestBase {
         Map<String, Object> jsonMap = response.as(Map.class);
 
         System.out.println("jsonMap.toString() = " + jsonMap.toString());
-        //after we got the map we can hamcrest or junit assertions to do assertionzzz
+        //after we got the map we can hamcrest or junit assertions to do assertion
         String actualName = (String) jsonMap.get("name");
         assertThat(actualName, is("Meta"));
     }
@@ -43,7 +43,7 @@ public class JSONtoJAVATest extends SpartanTestBase {
         //we need to convert it json to java which is deserialize
        List<Map<String, Object>> jsonList = response.as(List.class);
 
-        System.out.println("jsonList.get(1).get(\"name\") = " + jsonList.get(1).get("name"));
+        System.out.println("jsonList.get(1).get(name) = " + jsonList.get(1).get("name"));
 
         Map<String, Object> spartan3 = jsonList.get(2);
         System.out.println("spartan3 = " + spartan3);
