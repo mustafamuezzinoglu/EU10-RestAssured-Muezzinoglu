@@ -18,6 +18,7 @@ public class CYDEOTrainingApiWithJsonPath {
     @BeforeAll
     public static void init() {
         //save baseUrl inside this variable so that we dont need to type each http method
+
         baseURI = "https://api.training.cydeo.com";
 
         //get ip address from configuration

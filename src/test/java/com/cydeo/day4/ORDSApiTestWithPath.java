@@ -2,6 +2,7 @@ package com.cydeo.day4;
 
 import com.cydeo.utilities.HRTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class ORDSApiTestWithPath extends HRTestBase {
     public void test1() {
 
         Response response = given().accept(ContentType.JSON)
-                .and().queryParam("q","{\"region_id\":2}")
+                .and().queryParam("q", "{\"region_id\":2}")
                 .when().get("/countries");
 
         assertEquals(200, response.statusCode());
@@ -53,7 +54,6 @@ public class ORDSApiTestWithPath extends HRTestBase {
         }
     }
 
-
     @DisplayName("GET request to /employees with Query Param")
     @Test
     public void test2() {
@@ -75,7 +75,7 @@ public class ORDSApiTestWithPath extends HRTestBase {
     }
 
     //TASK
-    //print each name of IT_PROGs
+    //print name of each IT_PROGs
 
     @DisplayName("GET request to /employees each name of IT_PROGs with Query Param")
     @Test
@@ -89,9 +89,14 @@ public class ORDSApiTestWithPath extends HRTestBase {
         assertEquals("application/json", response.header("Content-Type"));
         assertTrue(response.body().asString().contains("IT_PROG"));
 
+        List<String> firstNames = response.path("items.first_name");
+
+        for (String eachName : firstNames){
+
+            System.out.println("eachName = " + eachName);
+        }
+
     }
-
-
 
 
 }

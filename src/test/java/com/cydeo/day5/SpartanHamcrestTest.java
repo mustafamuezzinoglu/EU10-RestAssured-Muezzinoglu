@@ -45,7 +45,7 @@ public class SpartanHamcrestTest extends SpartanTestBase {
                 .and()
                 .body("totalElement", is(3))
                 .extract().response().statusCode();
-        System.out.println("names = " + statusCode);
+        System.out.println("status code = " + statusCode);
 
     }
 

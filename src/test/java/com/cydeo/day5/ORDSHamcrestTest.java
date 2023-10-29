@@ -25,7 +25,7 @@ public class ORDSHamcrestTest extends HRTestBase {
         //verify emails without checking order (provide emails in different order,just make sure it has same emails)
         //expected names
 
-        List<String> names =Arrays.asList("Alexander","Bruce","David","Valli","Diana");
+    List<String> names =Arrays.asList("Alexander","Bruce","David","Valli","Diana");
 
         given().accept(ContentType.JSON)
                 .and().queryParam("q","{\"job_id\": \"IT_PROG\"}")
@@ -40,15 +40,18 @@ public class ORDSHamcrestTest extends HRTestBase {
 
         }
 
+
+//        Extract method
     @Test
     public void employeesTest2(){
         //we want to chain and also get response object
 
-      JsonPath jsonpath = given().accept(ContentType.JSON)
+      JsonPath jsonpath = given().log().all()
+              .accept(ContentType.JSON)
                 .and().queryParam("q", "{\"job_id\": \"IT_PROG\"}")
-                .when()
+              .when()
                 .get("/employees")
-                .then()
+              .then()
                 .statusCode(200)
                 .body("items.job_id", everyItem(equalTo("IT_PROG")))
                 .extract().jsonPath();
@@ -57,32 +60,26 @@ public class ORDSHamcrestTest extends HRTestBase {
       //assert that we have only 5 firstnames
         assertThat(jsonpath.getList("items.first_name"), hasSize(5));
 
-        //assert firsnames order
+        //assert first names order
         assertThat(jsonpath.getList("items.first_name"),containsInRelativeOrder("Alexander","Bruce","David","Valli","Diana") );
 
+        //=================================================================================================
 
-
-
-
-
-
-
-
-
-        JsonPath jsonPath = given().accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON)
                 .and().queryParam("q", "{\"job_id\": \"IT_PROG\"}")
                 .when()
                 .get("/employees")
                 .then()
                 .statusCode(200)
                 .body("items.job_id", everyItem(equalTo("IT_PROG")))
-                .extract().jsonPath();
+                .log().all()
+                .extract().response();
         //extract() --> method that allow us to get response object after we use then() method.
         //assert that we have only 5 firstnames
-        assertThat(jsonPath.getList("items.first_name"),hasSize(5));
+        assertThat(response.path("items.first_name"),hasSize(5));
 
         //assert firstnames order
-        assertThat(jsonPath.getList("items.first_name"),containsInRelativeOrder("Alexander","Bruce","David","Valli","Diana"));
+        assertThat(response.path("items.first_name"),containsInRelativeOrder("Alexander","Bruce","David","Valli","Diana"));
 
     }
 }

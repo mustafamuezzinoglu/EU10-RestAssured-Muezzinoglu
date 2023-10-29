@@ -32,17 +32,17 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         System.out.println("dbMap = " + dbMap);
 
 //  2.get info from api
-        Response response = given().accept(ContentType.JSON)
+        Map<String,Object> apiMap = given().accept(ContentType.JSON)
                 .pathParam("id", 15)
                 .when()
                 .get("/api/spartans/{id}")
                 .then()
                 .statusCode(200)
                 .and().contentType("application/json")
-                .extract().response();
+                .extract().response().as(Map.class);
 
-        //deserialization here Json to Java with Jackson objectMApper
-        Map<String, Object> apiMap = response.as(Map.class);
+        //deserialization here Json to Java with Jackson objectMapper
+//        Map<String, Object> apiMap = response.as(Map.class);
         System.out.println("apiMap = " + apiMap);
 
 //  3. compare

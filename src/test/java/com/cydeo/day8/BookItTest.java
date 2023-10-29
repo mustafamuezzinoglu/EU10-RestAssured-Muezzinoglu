@@ -13,12 +13,44 @@ public class BookItTest {
     @BeforeAll
     public static void init() {
 //save baseUrl inside this variable so that we dont need to type each http method
-        baseURI = "http://cybertek-reservation-api-qa.herokuapp.com";
+        baseURI = "https://api.qa.bookit.cydeo.com";
 
     }
     String accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMzkiLCJhdWQiOiJzdHVkZW50LXRlYW0tbGVhZGVyIn0._vM1-eRoS7SsHu6T-QPdJoEdA8LSwnxUvvTTbhV-8ms";
 
     //create BookItUtil then create a method, that accepts email and password return token Bearer +yourToken as a String
+
+
+    public static void getToken(){
+        String token = given().accept(ContentType.JSON)
+                .contentType("application/json")
+                .pathParam("email", "teacheriljanettebaskett@gmail.com")
+                .pathParam("password", "janettebaskett")
+                .when()
+                .get("/sign")
+                .then()
+                .statusCode(200).extract().jsonPath().getString("token");
+        System.out.println("token = " + token);
+
+    }
+
+
+    @DisplayName("GET /api/spartans as admin user expect 200")
+    @Test
+    public void testGettingToken(){
+
+        getToken();
+        //how to pass admin admin as a usernmae and password ?
+        given()
+                .auth().basic("admin", "admin")
+                .and().accept(ContentType.JSON)
+                .when()
+                .get("/sign")
+                .then()
+                .statusCode(200)
+                .log().all();
+    }
+
 
     @DisplayName("GET all campuses")
     @Test

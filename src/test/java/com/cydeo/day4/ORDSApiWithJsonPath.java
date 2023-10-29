@@ -15,13 +15,13 @@ public class ORDSApiWithJsonPath extends HRTestBase {
     @DisplayName("GET request to Countries")
     @Test
     public void test1(){
-        
+
         Response response = get("/countries");
 
-        //get the second country name with JsonPath
-
-        //to use jsonPath we assign response to jasonPath
         JsonPath jsonPath = response.jsonPath();
+
+        //get the second country name with JsonPath
+        //to use jsonPath we assign response to jasonPath
         String secondCountryName = jsonPath.getString("items[1].country_name");
         System.out.println("secondCountryName = " + secondCountryName);
 
@@ -31,12 +31,9 @@ public class ORDSApiWithJsonPath extends HRTestBase {
         System.out.println("allCountryIds = " + allCountryIds);
 
         //get all country names where their region id is equal to 2
-        List<Object> countryNameWithRegionId2 = jsonPath.getList("items.findAll {it.region_id==3}.country_name");
+
+        List<Object> countryNameWithRegionId2 = jsonPath.getList("items.findAll {it.region_id==2}.country_name");
         System.out.println("allCountryName = " + countryNameWithRegionId2);
-
-
-
-
     }
 
     @DisplayName("GET request /employees with query param")

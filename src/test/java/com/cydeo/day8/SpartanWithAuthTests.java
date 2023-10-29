@@ -10,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class SpartanWithAuthTests extends SpartanAuthTestBase {
+
     @DisplayName("GET /api/spartans as a public user(guest) expect 401")
     @Test
     public void test1(){
@@ -34,8 +35,8 @@ public class SpartanWithAuthTests extends SpartanAuthTestBase {
                 .then()
                 .statusCode(200)
                 .log().all();
-
     }
+
 
     @DisplayName("DELETE /spartans/{id} as editor user expect 403")
     @Test
@@ -53,6 +54,15 @@ public class SpartanWithAuthTests extends SpartanAuthTestBase {
                 .log().body();
 
     }
+
+
+
+
+
+
+
+
+
 
 
 }

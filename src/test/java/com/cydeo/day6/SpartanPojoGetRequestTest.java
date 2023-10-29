@@ -17,6 +17,22 @@ import static org.hamcrest.Matchers.*;
 
 public class SpartanPojoGetRequestTest extends SpartanTestBase {
 
+
+    @Test
+    public void testGet(){
+        String requestJsonBody = "{\"gender\":\"Male\",\n" +
+                "\"name\":\"cic0\",\n" +
+                "\"phone\":1112223334}";
+
+        Response response = given().accept(ContentType.JSON).and()
+                .contentType(ContentType.JSON)
+                .body(requestJsonBody)
+                .when()
+                .post("/api/spartans");
+
+    }
+
+
     @DisplayName("GET one spartan and convert it to  Spartan Object")
     @Test
     public void oneSpartanPojo() {
@@ -97,6 +113,9 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
 
         System.out.println("spartanList.get(1).getName() = " + spartanList.get(1).getName());
     }
+
+
+
 
 
 }

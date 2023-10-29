@@ -1,9 +1,6 @@
 package com.cydeo.day6;
 
-import com.cydeo.pojo.Employee;
-import com.cydeo.pojo.Link;
-import com.cydeo.pojo.Region;
-import com.cydeo.pojo.Regions;
+import com.cydeo.pojo.*;
 import com.cydeo.utilities.HRTestBase;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -19,7 +16,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ORDSPojoGetRequestTest extends HRTestBase {
 
-
     @Test
     public void regionTest() {
 
@@ -27,13 +23,14 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
                 // .when(). and also we can add this part
                 get("/regions")
                 .then().statusCode(200)
+                        .log().body()
                 .extract().jsonPath();
 
         Region region1 = jsonPath.getObject("items[0]", Region.class);
 
         System.out.println("region1 = " + region1);
         System.out.println("region1.getRegion_id() = " + region1.getRId());
-        System.out.println("region1.getRegion_name() = " + region1.getRegion_name());
+        System.out.println("region1.getRegion_name() = " + region1.getRegionName());
         System.out.println("region1.getLinks().get(0).getHref() = " + region1.getLinks().get(0).getHref());
 
         Link link1 = region1.getLinks().get(0);
@@ -80,7 +77,7 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
 //loop through each of the region, save their ids and names to empty list that we prepare
         for (Region region : items) {
             regionIds.add(region.getRId());
-            regionNames.add(region.getRegion_name());
+            regionNames.add(region.getRegionName());
         }
         List<Integer> expectedRegionIds = Arrays.asList(1,2,3,4);
         List<String> expectedRegionNames = Arrays.asList("Europe", "Americas", "Asia", "Middle East and Africa");

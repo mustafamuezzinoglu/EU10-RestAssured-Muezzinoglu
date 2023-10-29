@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ORDSApiTestWithParameters {
 
-    //    BeforeAll is a annotation equals to @BeforeClass in TestNg, we use with static method name
+    //    BeforeAll is an annotation equals to @BeforeClass in TestNg, we use with static method name
     @BeforeAll
     public static void init() {
 //save baseUrl inside this variable so that we dont need to type each http method

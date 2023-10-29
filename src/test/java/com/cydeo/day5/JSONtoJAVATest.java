@@ -25,12 +25,17 @@ public class JSONtoJAVATest extends SpartanTestBase {
 
         //get the json and convert it to the map
 
+//we should add Json Databind or Gson dependency to pom xml to do deserialization
+
         Map<String, Object> jsonMap = response.as(Map.class);
 
         System.out.println("jsonMap.toString() = " + jsonMap.toString());
         //after we got the map we can hamcrest or junit assertions to do assertion
         String actualName = (String) jsonMap.get("name");
         assertThat(actualName, is("Meta"));
+        int id = (int) jsonMap.get("id");
+        assertThat(id,is(15));
+
     }
 
     @DisplayName("GET all spartans to JAVA data structure ")

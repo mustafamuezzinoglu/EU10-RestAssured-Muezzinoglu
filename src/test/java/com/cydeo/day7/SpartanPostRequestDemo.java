@@ -31,6 +31,7 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
  "A Spartan is Born!" message
  and same data what is posted
 */
+
     @Test
     public void postMethod1() {
 
@@ -138,13 +139,13 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
         System.out.println("spartan = " + spartan);
         String expectedResponseMessage = "A Spartan is Born!";
 
-        int idFromPost = given().accept(ContentType.JSON).and()//what we are asking from api which is JSON response
+         int idFromPost = given().accept(ContentType.JSON).and()//what we are asking from api which is JSON response
                 .contentType(ContentType.JSON) //what we are sending to api, which is JSON also
                 .body(spartan).log().all()
                 .when()
                 .post("/api/spartans")
-                .then()
-                .statusCode(201)
+                .then().statusCode(201)
+                .and()
                 .contentType("application/json")
                 .body("success", is(expectedResponseMessage))
                 .extract().jsonPath().getInt("data.id");

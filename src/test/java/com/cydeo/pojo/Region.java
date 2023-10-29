@@ -20,7 +20,7 @@ public class Region {
     private int RId;
 
     @JsonProperty("region_name")
-    private String region_name;
+    private String regionName;
 
     @JsonProperty("links")
     private List<Link> links;
