@@ -60,7 +60,7 @@ public class SpartanWithXml extends SpartanAuthTestBase {
         System.out.println("id = " + id);
 
         //how to get all names and save into list of string
-        List<Object> names = xmlPath.getList("List.item.name");
+        List<String> names = xmlPath.getList("List.item.name");
         System.out.println("names = " + names);
 
     }

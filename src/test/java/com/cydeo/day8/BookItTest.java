@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class BookItTest {
 
@@ -21,16 +20,18 @@ public class BookItTest {
     //create BookItUtil then create a method, that accepts email and password return token Bearer +yourToken as a String
 
 
-    public static void getToken(){
+    public static String getToken(){
         String token = given().accept(ContentType.JSON)
                 .contentType("application/json")
-                .pathParam("email", "teacheriljanettebaskett@gmail.com")
-                .pathParam("password", "janettebaskett")
+                .queryParam("email", "teacheriljanettebaskett@gmail.com")
+                .queryParam("password", "janettebaskett")
                 .when()
                 .get("/sign")
                 .then()
-                .statusCode(200).extract().jsonPath().getString("token");
+                .statusCode(200).extract().jsonPath().getString("accessToken");
         System.out.println("token = " + token);
+        String finalToken = "Bearer " + token;
+        return finalToken;
 
     }
 
@@ -39,13 +40,12 @@ public class BookItTest {
     @Test
     public void testGettingToken(){
 
-        getToken();
         //how to pass admin admin as a usernmae and password ?
         given()
-                .auth().basic("admin", "admin")
+                .header("Authorization", getToken())
                 .and().accept(ContentType.JSON)
                 .when()
-                .get("/sign")
+                .get("api/campuses")
                 .then()
                 .statusCode(200)
                 .log().all();

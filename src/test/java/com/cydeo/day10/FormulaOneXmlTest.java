@@ -13,7 +13,7 @@ public class FormulaOneXmlTest {
 
     @BeforeAll
     public  static void setUp(){
-        //http://www.ergast.com/api/f1/drivers/alonso
+        //https://www.ergast.com/api/f1/drivers/alonso
         baseURI= "https://ergast.com";
         basePath = "/api/f1/";
 
@@ -31,7 +31,8 @@ public class FormulaOneXmlTest {
                 .extract().response();
 
         XmlPath xmlPath = response.xmlPath();
-            //get given name
+
+        //get given name
         String givenName = xmlPath.getString("MrData.DriverTable.Driver.GivenName");
         System.out.println("givenName = " + givenName);
         //get family name
@@ -39,7 +40,9 @@ public class FormulaOneXmlTest {
         System.out.println("familyName = " + familyName);
         //get driverId
         String driverId = xmlPath.getString("MrData.DriverTable.Driver.@driverId");
+        String driverId2 = xmlPath.getString("MrData.DriverTable.@driverId");
         System.out.println("driverId = " + driverId);
+        System.out.println("driverId2 = " + driverId2);
         //get code
         String code = xmlPath.getString("MrData.DriverTable.Driver.@code");
         System.out.println("code = " + code);

@@ -18,7 +18,7 @@ public class JsonSchemaValidationTest extends SpartanAuthTestBase {
     @Test
     public void schemaValidation() {
         given().accept(ContentType.JSON).and()
-                .pathParam("id", 2)
+                .pathParam("id", 10)
                 .and()
                 .auth().basic("admin", "admin")
                 .when().get("/api/spartans/{id}")
