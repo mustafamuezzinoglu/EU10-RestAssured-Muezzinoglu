@@ -11,7 +11,8 @@ import static io.restassured.RestAssured.*;
 
 public class SpartanNewBase {
 
-    public static RequestSpecification requestSpec;
+    public static RequestSpecification adminRequestSpec;
+    public static RequestSpecification userRequestSpec;
     public static ResponseSpecification responseSpec;
 
     @BeforeAll
@@ -21,10 +22,16 @@ public class SpartanNewBase {
         port =7000;
         basePath = "/api";
 
-        requestSpec = given()
+        adminRequestSpec = given()
                 .accept(ContentType.JSON)
                 .and()
                 .auth().basic("admin", "admin")
+                .log().all();
+
+        userRequestSpec = given()
+                .accept(ContentType.JSON)
+                .and()
+                .auth().basic("user", "user")
                 .log().all();
 
         responseSpec = expect().statusCode(200)

@@ -27,10 +27,10 @@ public static List<Map<String,String>> getExcelData(){
 
     given()
             .accept(ContentType.JSON)
-            .baseUri("https://cybertek-reservation-api-qa2.herokuapp.com")
+            .baseUri("https://api.qa2.bookit.cydeo.com")
             .queryParams(user) //i pass map directly because query param keys and map keys are equal
             .when().get("/sign")
             .then().statusCode(200)
-            .log().all();
+            .log().body();
 }
 }

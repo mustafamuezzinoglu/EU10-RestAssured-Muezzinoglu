@@ -1,5 +1,7 @@
 package com.cydeo.Day11;
 
+import io.restassured.internal.common.assertion.Assertion;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import static io.restassured.RestAssured.*;
@@ -7,9 +9,10 @@ import static io.restassured.RestAssured.*;
 public class ParameterizedTestInJunit5 {
 
     @ParameterizedTest
-    @ValueSource(ints = {1,3,5,6,7,9,10,5,21,32 })
+    @ValueSource(ints = {1,2,3,4,5,6,7,8,9,10 })
     public void testMultipleNumbers(int number){
-        System.out.println("number = " + number);
+        System.out.println(number+ ". test" );
+//        Assertions.assertTrue(number>5);
     }
 
     @ParameterizedTest

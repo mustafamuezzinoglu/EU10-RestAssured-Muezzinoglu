@@ -16,33 +16,33 @@ public class BookitTestBase {
 
 
     @BeforeAll
-    public static void init(){
-      baseURI = ConfigurationReader.getProperty("qa3_api_url");
+    public static void init() {
+        baseURI = ConfigurationReader.getProperty("qa2_api_url");
 
         teacherReqSpec = given()
-                                .accept(ContentType.JSON)
-                                .header("Authorization",getTokenByRole("teacher"))
-                                .log().all();
-        studentMemberReqSpec =given()
-                               .accept(ContentType.JSON)
-                                .header("Authorization",getTokenByRole("student-member"))
-                                .log().all();
-        studentLeaderReqSpec =given()
-                             .accept(ContentType.JSON)
-                             .header("Authorization",getTokenByRole("student-leader"))
-                             .log().all();
+                .accept(ContentType.JSON)
+                .header("Authorization", getTokenByRole("teacher"))
+                .log().all();
+        studentMemberReqSpec = given()
+                .accept(ContentType.JSON)
+                .header("Authorization", getTokenByRole("student-member"))
+                .log().all();
+        studentLeaderReqSpec = given()
+                .accept(ContentType.JSON)
+                .header("Authorization", getTokenByRole("student-leader"))
+                .log().all();
         responseSpec = expect()
-                                .statusCode(200)
-                                .contentType(ContentType.JSON)
-                                .logDetail(LogDetail.ALL);
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .logDetail(LogDetail.ALL);
     }
 
     @AfterAll
-    public static void teardown(){
+    public static void teardown() {
         reset();
     }
 
-        //optional we can also make RS dynamic
+    //optional we can also make RS dynamic
     public static ResponseSpecification getDynamicResSpec(int statusCode) {
 
         return expect()
@@ -52,34 +52,24 @@ public class BookitTestBase {
 
     }
 
-    public static ResponseSpecification userCheck(String firstName,String lastName){
+    public static ResponseSpecification userCheck(String firstName, String lastName) {
 
         return expect()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("firstName",is(firstName))
-                .body("lastName",is(lastName))
+                .body("firstName", is(firstName))
+                .body("lastName", is(lastName))
                 .logDetail(LogDetail.ALL);
 
     }
 
-    //teacher,student-member,student-leader
-    public static RequestSpecification userReqSpec(String role){
-        //advanced lazy way :)
-       return given()
-                .accept(ContentType.JSON)
-                .header("Authorization",getTokenByRole(role))
-                .log().all();
-
-    }
-
-
 
     //teacher , student-member,student-leader
     //it will take user info from conf.properties
-    public static String getTokenByRole(String role){
+    public static String getTokenByRole(String role) {
         //switch,if make sure you get correct user info
         //send request/get token/ return token
+
         String email, pass;
 
         switch (role) {
@@ -105,18 +95,26 @@ public class BookitTestBase {
 
         String accessToken =
                 given()
-                .accept(ContentType.JSON)
-                .queryParams("email",email,"password",pass)
-                .when()
-                .get("/sign")
-                .then()
-                .statusCode(200)
-                .extract().jsonPath().getString("accessToken");
+                        .accept(ContentType.JSON)
+                        .queryParams("email", email, "password", pass)
+                        .when()
+                        .get("/sign")
+                        .then()
+                        .statusCode(200)
+                        .extract().jsonPath().getString("accessToken");
 
         return "Bearer " + accessToken;
-
-
-
     }
+
+
+    //teacher,student-member,student-leader
+    public static RequestSpecification userReqSpec(String role) {
+        //advanced lazy way :)
+        return given()
+                .accept(ContentType.JSON)
+                .header("Authorization", getTokenByRole(role))
+                .log().all();
+    }
+
 
 }

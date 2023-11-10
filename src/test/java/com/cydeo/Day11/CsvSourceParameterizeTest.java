@@ -54,6 +54,12 @@ public class CsvSourceParameterizeTest {
             "MD, Annapolis"  } )
     public void zipCodeMultiInputTest(String state, String city){
 
+      given().accept(ContentType.JSON)
+             .pathParam("state", state)
+             .pathParam("city", city)
+             .get("https://api.zippopotam.us/us/{state}/{city}")
+              .then().statusCode(200);
+
         System.out.println("state = " + state);
         System.out.println("city = " + city);
 
@@ -65,12 +71,12 @@ public class CsvSourceParameterizeTest {
                 .log().uri()
                 .when().get("/us/{state}/{city}")
                 .then()
-                .and().body("places.'place name'", everyItem(containsStringIgnoringCase(city)))
+                .and().body("places.'place name'", everyItem(containsStringIgnoringCase(city))) //if there is any space in the key we sould cover in a single coat
                 .statusCode(200)
 //                .log().body()
                 .extract().jsonPath().getList("places").size();
 
-        System.out.println("placeNumber = " + placeNumber);
+         System.out.println("placeNumber = " + placeNumber);
 
     }
 }

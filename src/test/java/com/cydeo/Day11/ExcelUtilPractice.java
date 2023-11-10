@@ -19,6 +19,7 @@ public class ExcelUtilPractice {
 
         //method for returning list of map
         List<Map<String, String>> dataList = vyTrackFile.getDataList();
+        System.out.println("dataList = " + dataList);
         for (Map<String, String> rowmap : dataList){
             System.out.println("rowmap = " + rowmap);
         }

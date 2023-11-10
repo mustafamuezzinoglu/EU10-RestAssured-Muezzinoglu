@@ -22,8 +22,8 @@ public class OldRestAssuredTest extends SpartanNewBase{
                 .get("spartans")
         .then().statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("id[0]", is(1))
-                .body("id[5]", is(6))
+                .body("id[0]", is(1)) // in this test if its failed somewhere it will stop the test
+                .body("id[5]", is(6)) // and its not going on
                 .log().all();
     }
 
@@ -31,7 +31,7 @@ public class OldRestAssuredTest extends SpartanNewBase{
     public void test2(){
 /*
 in previous version of RestAssured, the given when then style was actually
-written in given ex pect when format.
+written in given expect when format.
 it will assert all the result and give one answer and does not fail whole thing
 if first one fail unlike new structure
  */

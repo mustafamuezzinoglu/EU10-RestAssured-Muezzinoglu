@@ -34,7 +34,7 @@ public class SpartanSpecTest extends SpartanNewBase {
 //                                                .logDetail(LogDetail.ALL); //logging with response specification
 
         given()
-                .spec(requestSpec)
+                .spec(adminRequestSpec)
         .when()
                 .get("/spartans")
         .then()
@@ -45,16 +45,33 @@ public class SpartanSpecTest extends SpartanNewBase {
     public void test2(){
 
         given()
-                .accept(ContentType.JSON)
-                .and()
-                .auth().basic("admin", "admin")
+                .spec(adminRequestSpec)
+//                .accept(ContentType.JSON)
+//                .and()
+//                .auth().basic("admin", "admin")
                 .pathParam("id", 15 )
                 .log().all()
         .when()
                 .get("/spartans/{id}")
         .then()
-                .statusCode(200)
-                .and()
-                .contentType(ContentType.JSON);
+                .spec(responseSpec)
+//                .statusCode(200)
+//                .and()
+//                .contentType(ContentType.JSON)
+        ;
+    }
+
+
+    @Test
+    public void test3(){
+
+        given()
+                .spec(adminRequestSpec)
+                .queryParams("nameContains","j", "gender", "Female" )
+       .when()
+                .get("/spartans/search")
+      .then()
+                .spec(responseSpec)
+                .body("numberOfElements", is(6));
     }
 }
